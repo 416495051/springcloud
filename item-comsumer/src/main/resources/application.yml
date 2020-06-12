@@ -1,0 +1,30 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: item-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:10086/eureka
+service-provider:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+           timeoutInMilliseconds: 6000
+feign:
+  hystrix:
+    enabled: true
+circuitBreaker:
+  requestVolumeThreshold: 10
+  sleepWindowInMilliseconds: 5000
+  errorThresholdPercentage: 50
